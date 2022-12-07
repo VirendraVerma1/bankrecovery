@@ -33,10 +33,10 @@ class DataController extends Controller
     {
         $path = 'uploads/';
         $file = $this->fileUpload($request->file('file'), $path);
-
         try {
 
             $data=Excel::import(new ImportData, $file);
+           
             $excelData=new ExcelFile();
             $excelData->filename=$file;
             $excelData->storedname=$request->file('file')->getClientOriginalName();

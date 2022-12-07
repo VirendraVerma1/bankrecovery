@@ -7,12 +7,14 @@ use Illuminate\Http\Request;
 use App\User;
 use App\UserType;
 use Auth;
-
+use App\Data;
 
 class UserController extends Controller
 {
     function test_html()
     {
+        $users=Data::all();
+        dd($users);
         return view('admin.tempdashboard');
     }
 
