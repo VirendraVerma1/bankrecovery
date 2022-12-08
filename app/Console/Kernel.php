@@ -5,6 +5,8 @@ namespace App\Console;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 use DB;
+use File;
+use Illuminate\Support\Str;
 
 class Kernel extends ConsoleKernel
 {
@@ -14,7 +16,7 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        //
+        Commands\UploadScheduler::class,
     ];
 
     /**
@@ -27,11 +29,8 @@ class Kernel extends ConsoleKernel
     {
         // $schedule->command('inspire')
         //          ->hourly();
+        $schedule->command('excel:upload')->everyMinute()->appendOutputTo(storage_path('inspire.log'));
         
-        $schedule->call(function () {
-            $string = str_random(15);
-            DB::table('test')->insert($string);
-        })->everyMinute();
     }
 
     /**

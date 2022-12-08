@@ -27,3 +27,8 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/phpinfo', function() {
     phpinfo();
 });
+
+
+Route::get('crontest','HomeController@crontest')->name('crontest');
+Route::get('updatetest','DataController@isshedulingon')->name('updatetest');
+Route::get('filetest','DataController@filetest')->name('filetest');

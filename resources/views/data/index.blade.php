@@ -31,9 +31,6 @@
             </div>
 
 
-
-
-
             <div class="card">
             <div class="card-body">
               <h5 class="card-title">Data</h5>
@@ -43,8 +40,12 @@
                   <tr>
                     <th scope="col">#</th>
                     <th scope="col">File Name</th>
+                    <!-- <th scope="col">File Path</th> -->
+                    <th scope="col">Processed Index</th>
+                    <th scope="col">Status</th>
                     <th scope="col">Uploaded Date</th>
                     <th scope="col">Actions</th>
+                    
                   </tr>
                 </thead>
                 <tbody>
@@ -53,10 +54,15 @@
                   <tr>
                     <th scope="row">{{$data->id}}</th>
                     <td>{{$data->storedname}}</td>
+                    {{--<td>{{$data->filename}}</td>--}}
+                    <td>{{$data->processedid}}</td>
+                    <td>{{$data->status}}</td>
                     <td>{{$data->created_at}}</td>
                     <td>
                       <!-- <a class="btn btn-info" href="{{route('user_edit',$data->id)}}">edit</a>&emsp; -->
+                      @if($data->status!="in process" && $data->status!="in delete")
                       <a class="btn btn-danger" href="{{route('data_delete_file',$data->id)}}">delete</a>&emsp;
+                      @endif
                     </td>
                   </tr>
                   @endforeach
@@ -65,7 +71,8 @@
               </table>
               {{ $excelfile->links() }}
 
-              {{-- 
+              
+              {{--
               <table class="table table-striped">
                 <thead>
                   <tr>
@@ -111,8 +118,8 @@
               </table> 
 
               {{ $all_data->links() }}
+              
               --}}
-
               
               <!-- End Table with stripped rows -->
 
