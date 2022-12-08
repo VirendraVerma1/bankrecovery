@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use App\User;
+use App\Data;
 use App\ConnectionRequest;
 
 class DataController extends Controller
@@ -22,7 +23,21 @@ class DataController extends Controller
     public function searchData(Request $request)
     {
         //search in agreement no,regnum,chasisnum,enginenum
-        $data=Data::where($field, 'like', '%' . $search . '%')->get();
+        // if($this->validate_user_id($request->user_id))
+        // {
+           
+        // }
+        // else
+        // {
+        //     return $this->processResponse('Search',null,'failed','No user Found');
+        // }
+
+        $data=Data::where('agreementno', 'like', '%' . $request->search . '%')
+        ->orWhere('regdnum', 'like', '%' . $request->search . '%')
+        ->orWhere('chasisnum', 'like', '%' . $request->search . '%')
+        ->orWhere('enginenum', 'like', '%' . $request->search . '%')->limit(50)->get();
+        return $this->processResponse('Search',$data,'success','Here are the results');
+        
     }
 
 }

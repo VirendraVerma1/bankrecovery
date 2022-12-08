@@ -53,4 +53,16 @@ Trait ValidationTrait{
                return $users;
            }
        }
+
+       private function validate_user_id($user_id)
+       {
+          $user=User::where('id',$user_id)->first();
+           if($user)
+           {
+                 return $user;
+           }
+           else{
+            return null;
+           }
+       }
 }
